@@ -1,0 +1,6 @@
+library(googlesheets)
+
+
+dati<-gs_title("avvelenamenti")
+ds <-gs_read(dati, ws="avv" )
+
