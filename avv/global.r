@@ -30,3 +30,4 @@ bg<-tibble("comune"=nomecom, "lng"=centroidi[,1], "lat"=centroidi[,2])
 df<-avv %>% inner_join(bg) 
 
 
+content<-paste(as.character(df$specie), as.character(df$sostanza))

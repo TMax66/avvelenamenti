@@ -7,8 +7,11 @@ server <- function(input, output, session) {
   output$map <- renderLeaflet({
     leaflet(data=df %>% 
               filter(anno==input$anno)) %>% addTiles() %>% 
-      #fitBounds(~min(long), ~min(lat), ~max(long), ~max(lat)) %>% 
-      addMarkers(~lng, ~lat,popup = ~as.character(comune), label = ~as.character(comune))
+      fitBounds(~min(lng), ~min(lat), ~max(lng), ~max(lat)) %>% 
+      addMarkers(~lng, ~lat,popup = content) %>% 
+      addPolygons(data=BG, fill=F, color="black",weight = 1,  opacity = 1.0,
+                  highlightOptions = highlightOptions(color = "blue", weight = 3,
+                  bringToFront = TRUE))
   })
     
     
