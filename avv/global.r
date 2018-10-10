@@ -6,6 +6,7 @@ library(rgdal)
 library(sp)
 library(lubridate)
 library(DT)
+library(janitor)
 
 rm(list=ls())
 dati<-gs_title("avvelenamenti")
@@ -23,6 +24,13 @@ comuni<-readOGR(dsn="shp", layer = "Comuni_2012_polygon")
 comuni<-spTransform(comuni, CRS("+proj=longlat +datum=WGS84"))
 
 BG<-subset(comuni, comuni@data$NOME_PRO == "BERGAMO")
+
+# com<-avv$comune[avv$anno==input$anno]
+# 
+# polycom<-subset(BG, BG@data$NOME_COM %in% com)
+
+
+####centroidi####
 nomecom<-BG@data$NOME_COM
 centroidi<-coordinates(BG)
 bg<-tibble("comune"=as.character(nomecom), "lng"=centroidi[,1], "lat"=centroidi[,2])

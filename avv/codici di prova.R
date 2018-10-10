@@ -26,7 +26,30 @@ BG<-subset(comuni, comuni@data$NOME_PRO == "BERGAMO")
 
 com<-avv$comune[avv$anno==2018]
 
-polyvariabili<-subset(BG, BG@data$NOME_COM %in% com)
+polycom<-subset(BG, BG@data$NOME_COM %in% com)
+
+
+leaflet(data=polycom) %>% addTiles() %>% 
+  addPolygons(data=polycom, fill="navy",color="black",weight = 3,
+  highlightOptions = highlightOptions(color = "blue", weight = 3,bringToFront = TRUE)) %>% 
+  addPolygons(data=BG,fill=F, color="black", weight=1, opacity=1.0)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,16 +1,18 @@
 server <- function(input, output, session) {
   
   
+  com<-reactive({avv$comune[avv$anno==input$anno]})
+  
+  
   output$map <- renderLeaflet({
-    leaflet(data=df %>% 
-              filter(anno==input$anno)) %>% addTiles() %>% 
-      fitBounds(~min(lng), ~min(lat), ~max(lng), ~max(lat)) %>% 
-      addMarkers(~lng, ~lat, label=~paste(comune,specie, sostanza)) %>% 
-     
-      addPolygons(data=BG, fill=F,color="black",weight = 1,  opacity = 1.0,group = "poly",
-                  highlightOptions = highlightOptions(color = "blue", weight = 3,
-                  bringToFront = TRUE)) %>% 
-      addLayersControl(overlayGroups = "poly")
+    
+    polycom<-subset(BG, BG@data$NOME_COM %in% com())
+    
+    leaflet(data=polycom) %>% addTiles() %>% 
+      addPolygons(data=polycom, fillColor="red",color="black",weight = 3,
+                  highlightOptions = highlightOptions(color = "blue", weight = 3,bringToFront = TRUE)) %>% 
+      addPolygons(data=BG,fill=F, color="black", weight=1, opacity=1.0)
+  
   })
   
   tab<-reactive(tabella<-df %>% 
