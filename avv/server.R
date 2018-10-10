@@ -1,55 +1,26 @@
 server <- function(input, output, session) {
   
-  # Reactive expression for the data subsetted to what the user selected
- #
-  
   
   output$map <- renderLeaflet({
     leaflet(data=df %>% 
               filter(anno==input$anno)) %>% addTiles() %>% 
       fitBounds(~min(lng), ~min(lat), ~max(lng), ~max(lat)) %>% 
-      addMarkers(~lng, ~lat,popup = content) %>% 
-      addPolygons(data=BG, fill=F, color="black",weight = 1,  opacity = 1.0,
+      addMarkers(~lng, ~lat, label=~paste(comune,specie, sostanza)) %>% 
+     
+      addPolygons(data=BG, fill=F,color="black",weight = 1,  opacity = 1.0,group = "poly",
                   highlightOptions = highlightOptions(color = "blue", weight = 3,
-                  bringToFront = TRUE))
+                  bringToFront = TRUE)) %>% 
+      addLayersControl(overlayGroups = "poly")
   })
-    
-    
-    
-    
-    # Use leaflet() here, and only include aspects of the map that
-    # won't need to change dynamically (at least, not unless the
-    # entire map is being torn down and recreated).
-    #leaflet(quakes) %>% addTiles() %>%
-      #fitBounds(~min(long), ~min(lat), ~max(long), ~max(lat))
- 
   
-  # Incremental changes to the map (in this case, replacing the
-  # circles when a new color is chosen) should be performed in
-  # an observer. Each independent set of things that can change
-  # should be managed in its own observer.
-  # observe({
-  #   pal <- colorpal()
-  #   
-  #   leafletProxy("map", data = filteredData()) %>%
-  #     clearShapes() %>%
-  #     addCircles(radius = ~10^mag/10, weight = 1, color = "#777777",
-  #                fillColor = ~pal(mag), fillOpacity = 0.7, popup = ~paste(mag)
-  #     )
-  # })
+  tab<-reactive(tabella<-df %>% 
+                  filter(anno==input$anno) %>% 
+                  select(comune, "campione"=specie, sostanza) %>% 
+                  group_by(comune,campione,sostanza) %>% 
+                  summarise("N.casi"=n()) %>% 
+                  adorn_totals("row"))
   
-  # Use a separate observer to recreate the legend as needed.
-  # observe({
-  #   proxy <- leafletProxy("map", data = quakes)
-  #   
-  #   # Remove any existing legend, and only if the legend is
-  #   # enabled, create a new one.
-  #   proxy %>% clearControls()
-  #   if (input$legend) {
-  #     pal <- colorpal()
-  #     proxy %>% addLegend(position = "bottomright",
-  #                         pal = pal, values = ~mag
-  #     )
-  #   }
-  # })
+  output$tabella<-renderDataTable(
+    tab()
+  )
 }

@@ -5,8 +5,9 @@ library(maps)
 library(rgdal)
 library(sp)
 library(lubridate)
+library(DT)
 
-
+rm(list=ls())
 dati<-gs_title("avvelenamenti")
 ds <-gs_read(dati, ws="avv" )
 
@@ -24,10 +25,12 @@ comuni<-spTransform(comuni, CRS("+proj=longlat +datum=WGS84"))
 BG<-subset(comuni, comuni@data$NOME_PRO == "BERGAMO")
 nomecom<-BG@data$NOME_COM
 centroidi<-coordinates(BG)
-bg<-tibble("comune"=nomecom, "lng"=centroidi[,1], "lat"=centroidi[,2])
+bg<-tibble("comune"=as.character(nomecom), "lng"=centroidi[,1], "lat"=centroidi[,2])
+
 
 
 df<-avv %>% inner_join(bg) 
+df$specie[df$sample=="ESCA/BOCCONE"]<-"ESCA/BOCCONE"
 
 
-content<-paste(as.character(df$specie), as.character(df$sostanza))
+

@@ -8,13 +8,11 @@ ui <- bootstrapPage(
   
   leafletOutput("map", width = "100%", height = "100%"),
   absolutePanel(top = 10, right = 10,
-               # sliderInput("anno", "Anno", 2002, 2018,
-                           # value = 2018, step =1)
                selectInput("anno", "Anno",
-                           c(unique(as.character(df$anno))), selected = 2018
-                )
-                
-                
-                #),
-               
-  ))
+                           c(unique(as.character(df$anno))), selected = 2018),
+               br(),
+               DT::dataTableOutput("tabella")
+             )
+  
+  
+  )
