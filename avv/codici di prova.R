@@ -23,15 +23,18 @@ comuni<-readOGR(dsn="shp", layer = "Comuni_2012_polygon")
 comuni<-spTransform(comuni, CRS("+proj=longlat +datum=WGS84"))
 
 BG<-subset(comuni, comuni@data$NOME_PRO == "BERGAMO")
+BG<-rmapshaper::ms_simplify(BG)
 
-com<-avv$comune[avv$anno==2018]
+com<-avv$comune[avv$anno==2018 & avv$sample=="CANE"]
 
 polycom<-subset(BG, BG@data$NOME_COM %in% com)
 
 
 leaflet(data=polycom) %>% addTiles() %>% 
+  #questo aggiunge il layer dei comuni con casi di avv filtrati per input$anno#
   addPolygons(data=polycom, fill="navy",color="black",weight = 3,
   highlightOptions = highlightOptions(color = "blue", weight = 3,bringToFront = TRUE)) %>% 
+  #questo aggiunge il layer con tutti i comuni di BG#
   addPolygons(data=BG,fill=F, color="black", weight=1, opacity=1.0)
 
 

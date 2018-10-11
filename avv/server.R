@@ -9,9 +9,8 @@ server <- function(input, output, session) {
     polycom<-subset(BG, BG@data$NOME_COM %in% com())
     
     leaflet(data=polycom) %>% addTiles() %>% 
-      addPolygons(data=polycom, fillColor="red",color="black",weight = 3,
-                  highlightOptions = highlightOptions(color = "blue", weight = 3,bringToFront = TRUE)) %>% 
-      addPolygons(data=BG,fill=F, color="black", weight=1, opacity=1.0)
+      addPolygons(data=polycom, fillColor="red",color="black",weight = 1) %>% 
+      addPolygons(data=BG,fill=F, color="gray", weight=1, opacity=1.0)
   
   })
   
