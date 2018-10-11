@@ -17,21 +17,42 @@ avv<-ds %>% as.tibble() %>%
   filter(comune!="NON DEFINITO") %>% 
   mutate(dtprelievo=mdy(dtprelievo)) %>% 
   mutate(anno=year(dtprelievo))
+avv$specie[avv$sample=="ESCA/BOCCONE"]<-"ESCA/BOCCONE"
+
+
+avv<-avv %>% 
+  filter(anno==2014, specie=="CANE") 
+
+casi<-avv %>% 
+  group_by(comune) %>% 
+  summarise("casi"=n()) %>% 
+  select(casi) %>% 
+  as.vector()
+
+x<-as.numeric(casi$casi)
+
+com<-avv$comune
+polycom<-subset(BG, BG@data$NOME_COM %in% com)
+
+
 
 
 comuni<-readOGR(dsn="shp", layer = "Comuni_2012_polygon")
 comuni<-spTransform(comuni, CRS("+proj=longlat +datum=WGS84"))
 
 BG<-subset(comuni, comuni@data$NOME_PRO == "BERGAMO")
+BG<-rmapshaper::ms_simplify(BG)
 
-com<-avv$comune[avv$anno==2018]
 
 polycom<-subset(BG, BG@data$NOME_COM %in% com)
 
+bins <- c(1,2,3)
+pal <- colorBin("YlOrRd", domain = x, bins = bins)
+
 
 leaflet(data=polycom) %>% addTiles() %>% 
-  addPolygons(data=polycom, fill="navy",color="black",weight = 3,
-  highlightOptions = highlightOptions(color = "blue", weight = 3,bringToFront = TRUE)) %>% 
+  #questo aggiunge il layer dei comuni con casi di avv filtrati per input$anno#
+  addPolygons(data=polycom, fillColor = ~pal(x),color="black",weight = 3) %>% 
   addPolygons(data=BG,fill=F, color="black", weight=1, opacity=1.0)
 
 

@@ -1,7 +1,3 @@
-library(shiny)
-library(leaflet)
-library(RColorBrewer)
-
 
 ui <- navbarPage("Avvelenamenti", id="nav",
                  
@@ -13,18 +9,19 @@ ui <- navbarPage("Avvelenamenti", id="nav",
                                 includeCSS("styles.css")),
   
   leafletOutput("map",  width="100%", height="100%"),
+  
   absolutePanel(class = "panel panel-default", fixed = TRUE,
                 draggable = TRUE, top = 60, left = "auto", right = 30, bottom = "auto",
                 width = 400, height = "auto",
                 
-                h4("O.M.xxx 2012"),
-               
-                
-                
-                
+                h5("O.M.25/06/2018"),
                 
                 selectInput("anno", "Anno",
-                           c(unique(as.character(df$anno))), selected = "")#,
+                            c(unique(as.character(avv$anno))), selected = 2018),
+                selectInput("specie", "Specie/Esca Boccone",
+                            c(unique(as.character(avv$specie))), selected = "CANE")
+               
+                #,
               # br(),
                #DT::dataTableOutput("tabella")
              )
