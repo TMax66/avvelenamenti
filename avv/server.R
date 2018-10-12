@@ -22,8 +22,9 @@ server <- function(input, output, session) {
            dx()$casi)
     
     leaflet(data=polycom) %>% addTiles() %>% 
-      addPolygons(data=polycom, fillColor="red",color="black",weight = 1,label= pop) %>% 
-      addPolygons(data=BG,fill=F, color="gray", weight=1, opacity=1.0)
+      addPolygons(data=polycom, fillColor="navy",color="", fillOpacity = 0.7) %>% 
+      addPolygons(data=BG,fill=F, color="gray", weight=1, opacity=1.0) %>% 
+      addPolygons(data=provincie, fill=F, color="blue", weight = 2)
   
   })
   

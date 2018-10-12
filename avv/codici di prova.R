@@ -24,13 +24,11 @@ avv<-avv %>%
   summarise("casi"=n())
 com<-avv$comune
 
-
-
-
-
-
 comuni<-readOGR(dsn="shp", layer = "Comuni_2012_polygon")
 comuni<-spTransform(comuni, CRS("+proj=longlat +datum=WGS84"))
+provincie<-readOGR(dsn="shp", layer="Province_2012_polygon")
+provincie<-spTransform(provincie, CRS("+proj=longlat +datum=WGS84"))
+
 
 BG<-subset(comuni, comuni@data$NOME_PRO == "BERGAMO")
 BG<-rmapshaper::ms_simplify(BG)
@@ -39,31 +37,15 @@ BG<-rmapshaper::ms_simplify(BG)
 polycom<-subset(BG, BG@data$NOME_COM %in% com)
 polycom@data<polycom@data %>% inner_join(avv, by=c("NOME_COM"="comune"))
 
-bins <- c(1,2,3)
-pal <- colorBin("YlOrRd", domain = x, bins = bins)
+
+
+
 
 
 leaflet(data=polycom) %>% addTiles() %>% 
-  #questo aggiunge il layer dei comuni con casi di avv filtrati per input$anno#
-  addPolygons(data=polycom, fillColor = ~pal(x),color="black",weight = 3) %>% 
-  addPolygons(data=BG,fill=F, color="black", weight=1, opacity=1.0)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  addPolygons(data=polycom, fillColor="navy3",color="", fillOpacity = 0.8) %>% 
+  addPolygons(data=BG,fill=F, color="gray", weight=1, opacity=1.0) %>% 
+  addPolygons(data=provincie, fill=F, color="blue", weight = 2)
 
 
 
