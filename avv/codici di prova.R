@@ -18,21 +18,13 @@ avv<-ds %>% as.tibble() %>%
   mutate(dtprelievo=mdy(dtprelievo)) %>% 
   mutate(anno=year(dtprelievo))
 avv$specie[avv$sample=="ESCA/BOCCONE"]<-"ESCA/BOCCONE"
-
-
 avv<-avv %>% 
-  filter(anno==2014, specie=="CANE") 
-
-casi<-avv %>% 
+  filter(anno==2014, specie=="CANE") %>% 
   group_by(comune) %>% 
-  summarise("casi"=n()) %>% 
-  select(casi) %>% 
-  as.vector()
-
-x<-as.numeric(casi$casi)
-
+  summarise("casi"=n())
 com<-avv$comune
-polycom<-subset(BG, BG@data$NOME_COM %in% com)
+
+
 
 
 
@@ -45,6 +37,7 @@ BG<-rmapshaper::ms_simplify(BG)
 
 
 polycom<-subset(BG, BG@data$NOME_COM %in% com)
+polycom@data<polycom@data %>% inner_join(avv, by=c("NOME_COM"="comune"))
 
 bins <- c(1,2,3)
 pal <- colorBin("YlOrRd", domain = x, bins = bins)
