@@ -22,10 +22,32 @@ server <- function(input, output, session) {
            dx()$casi)
     
     leaflet(data=polycom) %>% addTiles() %>% 
-      addPolygons(data=polycom, fillColor="red",color="black",weight = 1,label= pop) %>% 
-      addPolygons(data=BG,fill=F, color="gray", weight=1, opacity=1.0)
+      addPolygons(data=polycom, fillColor="navy",color="", fillOpacity = 0.7) %>% 
+      addPolygons(data=BG,fill=F, color="gray", weight=1, opacity=1.0) %>% 
+      addPolygons(data=provincie, fill=F, color="blue", weight = 2)
   
   })
+  
+  ploty<-reactive({
+    avv %>% 
+    mutate("anno"=as.character(anno)) %>% 
+    group_by(anno, specie) %>% 
+    summarise("casi"=n()) %>% 
+    filter(specie==input$specie) %>% 
+      data.frame()
+    })
+  
+  output$p<-renderPlot(
+    ggplot(ploty(), aes(x = anno, weight = casi)) +
+      geom_bar(fill = "navy") + labs(y="N. casi")+
+    theme_minimal()
+  )
+  
+  
+
+  
+  
+  
   
   tab<-reactive(tabella<-df %>% 
                   filter(anno==input$anno) %>% 

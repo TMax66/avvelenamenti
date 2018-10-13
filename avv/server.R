@@ -28,6 +28,27 @@ server <- function(input, output, session) {
   
   })
   
+  ploty<-reactive({
+    avv %>% 
+    mutate("anno"=as.character(anno)) %>% 
+    group_by(anno, specie) %>% 
+    summarise("casi"=n()) %>% 
+    filter(specie==input$specie) %>% 
+      data.frame()
+    })
+  
+  output$p<-renderPlot(
+    ggplot(ploty(), aes(x = anno, weight = casi)) +
+      geom_bar(fill = "navy") + labs(y="N. casi")+
+    theme_minimal()
+  )
+  
+  
+
+  
+  
+  
+  
   tab<-reactive(tabella<-df %>% 
                   filter(anno==input$anno) %>% 
                   select(comune, "campione"=specie, sostanza) %>% 

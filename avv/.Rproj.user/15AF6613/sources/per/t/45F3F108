@@ -1,19 +1,19 @@
 {
     "collab_server" : "",
     "contents" : "",
-    "created" : 1539330212754.000,
+    "created" : 1539421382079.000,
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "1976664928",
-    "id" : "7CB33A73",
-    "lastKnownWriteTime" : 1539344583,
+    "hash" : "1831687969",
+    "id" : "45F3F108",
+    "lastKnownWriteTime" : 1539422028,
     "last_content_update" : -2147483648,
     "path" : "D:/Dati/vito.tranquillo/gitProject/avvelenamenti/avv/server.R",
     "project_path" : "server.R",
     "properties" : {
-        "cursorPosition" : "7,27",
-        "scrollLine" : "0"
+        "cursorPosition" : "46,0",
+        "scrollLine" : "30"
     },
     "relative_order" : 3,
     "source_on_save" : false,

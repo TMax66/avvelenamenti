@@ -76,3 +76,15 @@ df %>%
   group_by(comune,campione,sostanza) %>% 
   summarise("N.casi"=n()) %>% 
   adorn_totals("row")
+
+
+
+ploty<-avv %>% 
+  mutate("anno"=as.character(anno)) %>% 
+  group_by(anno, specie) %>% 
+  summarise("casi"=n()) %>% 
+  filter(specie=="CANE") %>% 
+
+ ggplot(ploty, aes(x = anno, weight = casi)) +
+      geom_bar(fill = "#0c4c8a") + labs(y="N. casi")
+      theme_minimal()
