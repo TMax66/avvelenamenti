@@ -8,6 +8,13 @@ server <- function(input, output, session) {
       summarise("casi"=n())
   })
   
+  lab<-reactive({
+    avv %>% 
+    filter(anno==input$anno, specie==input$specie) %>%
+    group_by(comune, sostanza) %>% 
+    summarise("casi"=n())
+  })
+  
   com<-reactive({
     dx()$comune
     })
@@ -16,13 +23,12 @@ server <- function(input, output, session) {
     
     polycom<-subset(BG, BG@data$NOME_COM %in% com())
     
-    polycom@data %>% inner_join(dx(), by=c("NOME_COM"="comune"))
+    polycom@data %>% inner_join(lab(), by=c("NOME_COM"="comune"))
     
-    pop<-paste0(polycom@data$NOME_COM, 
-           dx()$casi)
+    pop<-paste(polycom@data$NOME_COM, polycom@data$casi, polycom@data$sostanza)
     
     leaflet(data=polycom) %>% addTiles() %>% 
-      addPolygons(data=polycom, fillColor="navy",color="", fillOpacity = 0.7) %>% 
+      addPolygons(data=polycom, fillColor="navy",color="", fillOpacity = 0.7, label=pop) %>% 
       addPolygons(data=BG,fill=F, color="gray", weight=1, opacity=1.0) %>% 
       addPolygons(data=provincie, fill=F, color="blue", weight = 2)
   
@@ -49,10 +55,10 @@ server <- function(input, output, session) {
   
   
   
-  tab<-reactive(tabella<-df %>% 
-                  filter(anno==input$anno) %>% 
-                  select(comune, "campione"=specie, sostanza) %>% 
-                  group_by(comune,campione,sostanza) %>% 
+  tab<-reactive(tabella<-avv %>% 
+                  filter(anno==input$anno,specie==input$specie) %>% 
+                  select(comune, sostanza) %>% 
+                  group_by(comune,sostanza) %>% 
                   summarise("N.casi"=n()) %>% 
                   adorn_totals("row"))
   

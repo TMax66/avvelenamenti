@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1539611549626.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1137617697",
+    "id" : "87E1BB24",
+    "lastKnownWriteTime" : 1539612608,
+    "last_content_update" : -2147483648,
+    "path" : "D:/Dati/vito.tranquillo/gitProject/avvelenamenti/avv/global.r",
+    "project_path" : "global.r",
+    "properties" : {
+        "cursorPosition" : "51,0",
+        "scrollLine" : "26"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

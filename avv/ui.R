@@ -4,12 +4,13 @@ body<-dashboardBody(
   fluidRow(
     column(width = 7,
            box(width = NULL, solidHeader = TRUE,
-               leafletOutput("map", height=600)
-           # ),
-           # box(width=NULL,
-           #     dataTableOutput("boroughTable")
-           # )
-    )),
+               leafletOutput("map", height=600)),
+               
+        
+           box(width=NULL,solidHeader = TRUE,
+           dataTableOutput("tabella")
+           )
+    ),
     column(width=5,
             box(width=NULL, 
               sliderInput("anno", "Anno", min=2002, max=2018, value=2018),
@@ -20,11 +21,6 @@ body<-dashboardBody(
                hr(),
                br(),
                plotOutput("p")
-           
-               
-               
-               
-               
     )
   )
 ))
