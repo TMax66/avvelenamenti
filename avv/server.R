@@ -28,7 +28,7 @@ server <- function(input, output, session) {
     pop<-paste(polycom@data$NOME_COM, polycom@data$casi, polycom@data$sostanza)
     
     leaflet(data=polycom) %>% addTiles() %>% 
-      addPolygons(data=polycom, fillColor="navy",color="", fillOpacity = 0.7, label=pop) %>% 
+      addPolygons(data=polycom, fillColor="navy",color="", fillOpacity = 0.7) %>% 
       addPolygons(data=BG,fill=F, color="gray", weight=1, opacity=1.0) %>% 
       addPolygons(data=provincie, fill=F, color="blue", weight = 2)
   
@@ -48,13 +48,7 @@ server <- function(input, output, session) {
       geom_bar(fill = "navy") + labs(y="N. casi")+
     theme_minimal()
   )
-  
-  
 
-  
-  
-  
-  
   tab<-reactive(tabella<-avv %>% 
                   filter(anno==input$anno,specie==input$specie) %>% 
                   select(comune, sostanza) %>% 
