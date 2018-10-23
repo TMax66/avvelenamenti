@@ -29,7 +29,7 @@ comuni<-readOGR(dsn="shp", layer = "Comuni_2012_polygon")
 comuni<-spTransform(comuni, CRS("+proj=longlat +datum=WGS84"))
 
 BG<-subset(comuni, comuni@data$NOME_PRO == "BERGAMO")
-BG<-rmapshaper::ms_simplify(BG)
+#BG<-rmapshaper::ms_simplify(BG)
 
 provincie<-readOGR(dsn="shp", layer="Province_2012_polygon")
 provincie<-spTransform(provincie, CRS("+proj=longlat +datum=WGS84"))

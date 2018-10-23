@@ -57,6 +57,7 @@ server <- function(input, output, session) {
                   adorn_totals("row"))
   
   output$tabella<-renderDataTable(
-    tab()
+    tab(), class = 'cell-border stripe',rownames = FALSE,caption = "casistica per comune e sostanza identificata",
+    options=list(dom='t')
   )
 }
