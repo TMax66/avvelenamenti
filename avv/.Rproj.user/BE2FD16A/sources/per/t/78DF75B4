@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1540410847498.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3593607568",
+    "id" : "78DF75B4",
+    "lastKnownWriteTime" : 1540410997,
+    "last_content_update" : 1540410997339,
+    "path" : "G:/GITHUB/avvelenamenti/avv/ui.R",
+    "project_path" : "ui.R",
+    "properties" : {
+        "cursorPosition" : "33,0",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1540402057102.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "89C1D85",
+    "lastKnownWriteTime" : 32932769850589295,
+    "last_content_update" : 1540402057102,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "7DF812E9",
+        "caption" : "avv",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=avv&cache_key=7DF812E9",
+        "displayedObservations" : 148,
+        "environment" : "",
+        "object" : "avv",
+        "preview" : 0,
+        "totalObservations" : 148,
+        "variables" : 7
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}
