@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1540457799222.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "765047019",
+    "id" : "1A93B4F2",
+    "lastKnownWriteTime" : 1540458065,
+    "last_content_update" : -2147483648,
+    "path" : "D:/Dati/vito.tranquillo/gitProject/avvelenamenti/avv/ui.R",
+    "project_path" : "ui.R",
+    "properties" : {
+        "cursorPosition" : "35,9",
+        "scrollLine" : "11"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

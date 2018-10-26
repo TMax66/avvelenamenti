@@ -1,0 +1,13 @@
+name: poison
+title: poison
+username:
+account: izslerbg
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 533987
+bundleId: 1662228
+url: https://izslerbg.shinyapps.io/poison/
+when: 1540465851.72797
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: codici di prova.R|styles.css

@@ -25,10 +25,11 @@ server <- function(input, output, session) {
     
     polycom@data %>% inner_join(lab(), by=c("NOME_COM"="comune"))
     
-    pop<-paste(polycom@data$NOME_COM, polycom@data$casi, polycom@data$sostanza)
+    pop<-polycom@data$NOME_COM
     
     leaflet(data=polycom) %>% addTiles() %>% 
-      addPolygons(data=polycom, fillColor="navy",color="", fillOpacity = 0.7) %>% 
+      addPolygons(data=polycom, fillColor="navy",color="", fillOpacity = 0.9, label=pop) %>% 
+      
       addPolygons(data=BG,fill=F, color="gray", weight=1, opacity=1.0) %>% 
       addPolygons(data=provincie, fill=F, color="blue", weight = 2)
   
@@ -57,7 +58,7 @@ server <- function(input, output, session) {
                   adorn_totals("row"))
   
   output$tabella<-renderDataTable(
-    tab(), class = 'cell-border stripe',rownames = FALSE,caption = "casistica per comune e sostanza identificata",
-    options=list(dom='t')
+    tab(), class = 'cell-border stripe',rownames = FALSE,
+    options=list(dom='t',pageLength = 15)
   )
 }
