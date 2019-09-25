@@ -11,8 +11,8 @@ library(DT)
 library(janitor)
 library(RColorBrewer)
 
-rm(list=ls())
-dati<-gs_title("avvelenamenti")
+
+dati<-gs_title("Avvelenamenti")
 ds <-gs_read(dati, ws="avv" )
 ds<-ds %>% 
   filter(provincia=="BG")

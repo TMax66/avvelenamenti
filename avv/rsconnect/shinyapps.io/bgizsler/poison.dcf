@@ -5,8 +5,9 @@ account: bgizsler
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 1241970
-bundleId: 2444030
+bundleId: 2444380
 url: https://bgizsler.shinyapps.io/poison/
-when: 1569418112.37614
+when: 1569425161.0857
 asMultiple: FALSE
 asStatic: FALSE
+ignoredFiles: codici di prova.R|styles.css
