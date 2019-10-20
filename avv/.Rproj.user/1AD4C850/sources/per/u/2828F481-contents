@@ -1,0 +1,2 @@
+library(kappaSize)
+PowerBinary(kappa0=0.15, kappa1=0.8, props=0.007, alpha=0.05, power=0.80)
